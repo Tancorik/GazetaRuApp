@@ -1,6 +1,6 @@
 package com.example.tancorik.gazetaruapp.domain;
 
-import com.example.tancorik.gazetaruapp.presentation.model.NewsModel;
+import com.example.tancorik.gazetaruapp.presentation.model.News;
 
 import java.io.IOException;
 
@@ -11,13 +11,13 @@ import io.reactivex.Observable;
  *
  *      21.08.2018
  *
- *  Интерфейс для предоставления новостей в формате NewsModel.
+ *  Интерфейс для предоставления новостей в формате News.
  *
  */
 public interface IRemoteRssService {
 
-    NewsModel getNews(String rssUrl) throws IOException;
-    Observable<NewsModel> getNewsObservable();
+    News getNews(String rssUrl) throws IOException;
+    Observable<News> getNewsObservable();
 
     /**
      * Интерфейс содержит список ссылок на рубрики новостей

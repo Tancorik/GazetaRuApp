@@ -3,7 +3,7 @@ package com.example.tancorik.gazetaruapp.data;
 import android.util.Log;
 
 import com.example.tancorik.gazetaruapp.domain.IRemoteRssService;
-import com.example.tancorik.gazetaruapp.presentation.model.NewsModel;
+import com.example.tancorik.gazetaruapp.presentation.model.News;
 
 import org.simpleframework.xml.core.Persister;
 
@@ -40,10 +40,10 @@ public class RemoteRssService implements IRemoteRssService {
     private static final String LOG_TAG = "remoteRssService_LOGS";
 
     @Override
-    public NewsModel getNews(String rssUrl) throws IOException {
+    public News getNews(String rssUrl) throws IOException {
         InputStream inputStream = null;
         HttpURLConnection connection = null;
-        NewsModel newsModel;
+        News news;
         try {
             URL url = new URL(rssUrl);
             connection = (HttpURLConnection) url.openConnection();
@@ -62,7 +62,7 @@ public class RemoteRssService implements IRemoteRssService {
             }
             Reader reader = new InputStreamReader(inputStream, "windows-1251");
             try {
-                newsModel = new Persister().read(NewsModel.class, reader, false);
+                news = new Persister().read(News.class, reader, false);
             } catch (Exception e) {
                 Log.i(LOG_TAG, "Error parse! " + rssUrl);
                 throw new IOException("Error parse! " + rssUrl);
@@ -74,11 +74,11 @@ public class RemoteRssService implements IRemoteRssService {
             if (connection != null)
                 connection.disconnect();
         }
-        return newsModel;
+        return news;
     }
 
     @Override
-    public Observable<NewsModel> getNewsObservable() {
+    public Observable<News> getNewsObservable() {
         Observable<String> urlObservable = Observable.fromArray(IRssList.RSS_ARRAY);
         return urlObservable.subscribeOn(Schedulers.io())
                 .map(this::getNews)

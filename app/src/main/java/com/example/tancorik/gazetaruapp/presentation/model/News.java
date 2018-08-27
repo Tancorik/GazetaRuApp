@@ -16,7 +16,7 @@ import java.util.List;
  *      модель содержит всю информацию о новостях с одного RSS
  */
 @Root(name = "rss")
-public class NewsModel {
+public class News {
 
     @Element(name = "channel")
     private Channel mChannel;

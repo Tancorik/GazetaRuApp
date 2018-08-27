@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">GazetaRuApp</string>
+    <string name="logo">rssLogo</string>
+    <string name="copyright_text">Информация взята с сайта</string>
+    <string name="download_text">Загружается:</string>
+    <string name="nothing_download_text">Пока ничего не загружается!</string>
+    <string name="copyright_bottom_text">Новости с сайта</string>
+    <string name="news_title">Название новости</string>
+    <string name="date_stub">Тут будет дата</string>
+    <string name="description_stub">Тут будет описание новости</string>
 </resources>
