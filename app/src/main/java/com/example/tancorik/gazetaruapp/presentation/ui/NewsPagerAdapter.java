@@ -14,7 +14,7 @@ public class NewsPagerAdapter extends FragmentStatePagerAdapter {
 
     private List<News> mNewsList = new ArrayList<>();
 
-    public NewsPagerAdapter(FragmentManager fm) {
+    NewsPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 

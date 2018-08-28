@@ -40,11 +40,10 @@ public class MainActivity extends AppCompatActivity implements IMainScreenView{
         }
         mNewsFragment = NewsFragment.getInstance(getSupportFragmentManager());
 
-        if (savedInstanceState == null) {
-            IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-            mReceiver = new NetworkReceiver();
-            registerReceiver(mReceiver, filter);
-        }
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        mReceiver = new NetworkReceiver();
+        registerReceiver(mReceiver, filter);
+
         mPresenter.initPresenter(this);
     }
 
@@ -57,28 +56,33 @@ public class MainActivity extends AppCompatActivity implements IMainScreenView{
     @Override
     protected void onPause() {
         super.onPause();
-        if (isFinishing())
+        if (isFinishing()) {
             mPresenter.clearPresenter();
+        }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-//        unregisterReceiver(mReceiver);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
     }
 
     @Override
     public void showProgress() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, mProgressFragment, ProgressFragment.TAG)
-                .commit();
+        if (!mProgressFragment.isVisible()) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, mProgressFragment, ProgressFragment.TAG)
+                    .commit();
+        }
     }
 
     @Override
     public void showNews(List<News> newsList) {
-//        if (isChangingConfigurations()) {
-//            return;
-//        }
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, mNewsFragment, NewsFragment.TAG)
                 .commitAllowingStateLoss();

@@ -3,6 +3,7 @@ package com.example.tancorik.gazetaruapp.presentation.ui;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.example.tancorik.gazetaruapp.application.MyApp;
 import com.example.tancorik.gazetaruapp.presentation.presenter.MainScreenPresenter;
@@ -20,6 +21,7 @@ public class NetworkReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.i("Log_TAG_PRESENTER", "Ресивер принял сообщение");
         if (mPresenter != null)
             mPresenter.updateState();
     }
