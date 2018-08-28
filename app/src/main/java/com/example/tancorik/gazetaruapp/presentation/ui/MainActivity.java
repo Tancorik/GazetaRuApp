@@ -19,7 +19,6 @@ import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity implements IMainScreenView{
 
-
     @Inject
     MainScreenPresenter mPresenter;
 
@@ -34,21 +33,25 @@ public class MainActivity extends AppCompatActivity implements IMainScreenView{
 
         MyApp.getAppComponent().inject(this);
 
-        mProgressFragment = new ProgressFragment();
+        mProgressFragment = (ProgressFragment) getSupportFragmentManager()
+                .findFragmentByTag(ProgressFragment.TAG);
+        if (mProgressFragment == null) {
+            mProgressFragment = new ProgressFragment();
+        }
         mNewsFragment = NewsFragment.getInstance(getSupportFragmentManager());
 
-//        if (savedInstanceState == null)
-//        mPresenter.initPresenter(this);
-
+        if (savedInstanceState == null) {
+            IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+            mReceiver = new NetworkReceiver();
+            registerReceiver(mReceiver, filter);
+        }
+        mPresenter.initPresenter(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        mPresenter.initPresenter(this);
-        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        mReceiver = new NetworkReceiver();
-        registerReceiver(mReceiver, filter);
+
     }
 
     @Override
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements IMainScreenView{
     @Override
     protected void onStop() {
         super.onStop();
-        unregisterReceiver(mReceiver);
+//        unregisterReceiver(mReceiver);
     }
 
     @Override
@@ -73,9 +76,9 @@ public class MainActivity extends AppCompatActivity implements IMainScreenView{
 
     @Override
     public void showNews(List<News> newsList) {
-        if (isChangingConfigurations()) {
-            return;
-        }
+//        if (isChangingConfigurations()) {
+//            return;
+//        }
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, mNewsFragment, NewsFragment.TAG)
                 .commitAllowingStateLoss();

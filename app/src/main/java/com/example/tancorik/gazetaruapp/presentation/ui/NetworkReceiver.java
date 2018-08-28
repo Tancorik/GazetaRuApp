@@ -20,6 +20,7 @@ public class NetworkReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        mPresenter.updateState();
+        if (mPresenter != null)
+            mPresenter.updateState();
     }
 }

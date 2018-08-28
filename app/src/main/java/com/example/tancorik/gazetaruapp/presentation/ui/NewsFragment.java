@@ -9,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.tancorik.gazetaruapp.R;
 import com.example.tancorik.gazetaruapp.application.MyApp;
@@ -23,7 +22,6 @@ public class NewsFragment extends Fragment {
     MainScreenPresenter mPresenter;
     private ViewPager mViewPager;
     private NewsPagerAdapter mPagerAdapter;
-//    private int mKoefPage;
 
     public static final String TAG = "news_fragment";
 
@@ -39,8 +37,6 @@ public class NewsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MyApp.getAppComponent().inject(this);
-//        int countPage = mPresenter.getAllNews().size();
-//        mKoefPage = Integer.MAX_VALUE/countPage/2*countPage;
     }
 
 
@@ -65,10 +61,8 @@ public class NewsFragment extends Fragment {
                     }
                     else if (position == count-1) {
                         mViewPager.setCurrentItem(1, false);
-//                    Toast.makeText(getContext(), "position" + position, Toast.LENGTH_SHORT).show();
                     }
                 }
-//                Toast.makeText(getContext(), "position - " + position + "offset - " + positionOffset, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -84,20 +78,9 @@ public class NewsFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-//        mViewPager = view.findViewById(R.id.view_pager);
-//        mPagerAdapter = new NewsPagerAdapter(getFragmentManager());
-//        mPagerAdapter.setNewsList(mPresenter.getAllNews());
-//        mViewPager.setAdapter(mPagerAdapter);
-    }
-
     public void setCurrentPage(int page) {
         if (mViewPager != null)
             mViewPager.setCurrentItem(page+1, true);
-//            mViewPager.setCurrentItem(mKoefPage+page,true);
     }
 
 }

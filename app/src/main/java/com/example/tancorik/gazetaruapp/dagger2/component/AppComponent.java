@@ -3,10 +3,10 @@ package com.example.tancorik.gazetaruapp.dagger2.component;
 import com.example.tancorik.gazetaruapp.dagger2.module.AppModule;
 import com.example.tancorik.gazetaruapp.dagger2.module.PresenterModule;
 import com.example.tancorik.gazetaruapp.presentation.presenter.MainScreenPresenter;
+import com.example.tancorik.gazetaruapp.presentation.ui.NewsPageFragment;
 import com.example.tancorik.gazetaruapp.presentation.ui.MainActivity;
 import com.example.tancorik.gazetaruapp.presentation.ui.NetworkReceiver;
 import com.example.tancorik.gazetaruapp.presentation.ui.NewsFragment;
-import com.example.tancorik.gazetaruapp.presentation.ui.NewsPageFragment;
 
 import javax.inject.Singleton;
 

@@ -13,9 +13,9 @@ import com.example.tancorik.gazetaruapp.presentation.model.News;
 public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder> {
 
     private News mNews;
-    private NewsClickListener mListener;
+    private INewsClickListener mListener;
 
-    NewsRecyclerAdapter(News news, NewsClickListener listener) {
+    NewsRecyclerAdapter(News news, INewsClickListener listener) {
         mNews = news;
         mListener = listener;
     }
@@ -51,12 +51,11 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
             mTitleTextView = itemView.findViewById(R.id.news_title);
             mDateTextView = itemView.findViewById(R.id.news_date);
             mDescriptionTextView = itemView.findViewById(R.id.news_description);
-            itemView.setOnClickListener((view)-> {mListener.onNewsClick(getAdapterPosition());
-            });
+            itemView.setOnClickListener((view)-> mListener.onNewsClick(getAdapterPosition()));
         }
     }
 
-    interface NewsClickListener {
+    interface INewsClickListener {
         void onNewsClick(int position);
     }
 }
